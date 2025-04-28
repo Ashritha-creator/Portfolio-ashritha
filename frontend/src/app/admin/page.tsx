@@ -1,22 +1,24 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function AdminPage() {
+export default function AdminDashboard() {
   const router = useRouter();
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      router.push('/login');
-    }
-  }, []);
 
   return (
     <div style={{ padding: 20 }}>
-      <h1>Welcome to Admin Dashboard!</h1>
-      <p>You are logged in as Admin.</p>
+      <h1>Admin Dashboard</h1>
+      <div style={{ marginTop: 20 }}>
+        <button onClick={() => router.push('/admin/add-project')} style={{ marginBottom: 10 }}>
+          Add Project
+        </button><br/>
+        <button onClick={() => router.push('/admin/add-skill')} style={{ marginBottom: 10 }}>
+          Add Skill
+        </button><br/>
+        <button onClick={() => router.push('/admin/add-blog')} style={{ marginBottom: 10 }}>
+          Add Blog
+        </button>
+      </div>
     </div>
   );
 }
