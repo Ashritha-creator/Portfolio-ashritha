@@ -1,102 +1,131 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import axios from 'axios';
+
+export default function HomePage() {
+  const [skills, setSkills] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const skillsRes = await axios.get('https://portfolio-ashritha.onrender.com/skills');
+        const projectsRes = await axios.get('https://portfolio-ashritha.onrender.com/projects');
+        const blogsRes = await axios.get('https://portfolio-ashritha.onrender.com/blogs');
+        setSkills(skillsRes.data);
+        setProjects(projectsRes.data);
+        setBlogs(blogsRes.data);
+      } catch (err) {
+        console.error('Error fetching data', err);
+      }
+    }
+    fetchData();
+  }, []);
+
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert('Thank you for reaching out, Ashritha will get back to you!');
+    setName('');
+    setEmail('');
+    setMessage('');
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div style={{ fontFamily: 'sans-serif' }}>
+      {/* Hero Section */}
+      <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
+        style={{ backgroundColor: '#ffe4e6', minHeight: '100vh', textAlign: 'center', padding: 50 }}>
+        <img src="/profile.png"
+          alt="Profile" style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover', marginBottom: 20 }} />
+        <h1 style={{ fontSize: '2.5rem' }}>Ashritha Velineni</h1>
+        <h3 style={{ fontSize: '1.5rem', color: '#555' }}>Student</h3>
+      </motion.section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* About Section */}
+      <section style={{ backgroundColor: '#ffffff', minHeight: '60vh', padding: 50 }}>
+        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+          About Me
+        </motion.h2>
+        <p style={{ marginTop: 20, maxWidth: 800, marginInline: 'auto' }}>
+          My Name is Ashritha Velineni , Here is my intro 
+        </p>
+      </section>
+
+      {/* Skills Section */}
+      <section style={{ backgroundColor: '#e0f7fa', minHeight: '60vh', padding: 50 }}>
+        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+          Skills
+        </motion.h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
+          {skills.map((skill: any) => (
+            <motion.div key={skill.id} whileHover={{ scale: 1.1 }}
+              style={{ padding: 20, border: '2px solid #00acc1', borderRadius: 10, minWidth: 100 }}>
+              {skill.name}
+            </motion.div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Projects Section */}
+      <section style={{ backgroundColor: '#fff9c4', minHeight: '60vh', padding: 50 }}>
+        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+          Projects
+        </motion.h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
+          {projects.map((project: any) => (
+            <motion.div key={project.id} whileHover={{ scale: 1.05 }}
+              style={{ padding: 20, border: '2px solid #fbc02d', borderRadius: 10, width: 250 }}>
+              <h4>{project.title}</h4>
+              <p>{project.description}</p>
+              <a href={project.link} target="_blank" style={{ color: '#f57f17' }}>View Project</a>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Blogs Section */}
+      <section style={{ backgroundColor: '#f3e5f5', minHeight: '60vh', padding: 50 }}>
+        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+          Blogs
+        </motion.h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
+          {blogs.map((blog: any) => (
+            <motion.div key={blog.id} whileHover={{ scale: 1.05 }}
+              style={{ padding: 20, border: '2px solid #ba68c8', borderRadius: 10, width: 250 }}>
+              <h4>{blog.title}</h4>
+              <p>{blog.content.substring(0, 80)}...</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section style={{ backgroundColor: '#c8e6c9', minHeight: '60vh', padding: 50 }}>
+        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+          Contact Me
+        </motion.h2>
+        <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 20 }}>
+          <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)}
+            style={{ marginBottom: 10, padding: 10, width: '300px' }} />
+          <input type="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)}
+            style={{ marginBottom: 10, padding: 10, width: '300px' }} />
+          <textarea placeholder="Your Message" value={message} onChange={(e) => setMessage(e.target.value)}
+            style={{ marginBottom: 10, padding: 10, width: '300px', height: 100 }} />
+          <button type="submit" style={{ padding: 10, width: '150px', backgroundColor: '#4caf50', color: 'white', border: 'none', borderRadius: 5 }}>
+            Send
+          </button>
+        </form>
+      </section>
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#263238', color: 'white', padding: 20, textAlign: 'center' }}>
+        © 2025 Ashritha Velineni | All Rights Reserved
       </footer>
     </div>
   );

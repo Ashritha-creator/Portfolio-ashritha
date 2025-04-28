@@ -11,9 +11,14 @@ export default function AddSkillPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/skills', {
-        name,
-      });
+      await axios.post('https://portfolio-ashritha.onrender.com/skills',
+        { name },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
       alert('Skill Added Successfully!');
       router.push('/admin');
     } catch (err) {
@@ -21,7 +26,7 @@ export default function AddSkillPage() {
       alert('Error adding skill!');
     }
   };
-
+  
   return (
     <div style={{ padding: 20 }}>
       <h1>Add Skill</h1>

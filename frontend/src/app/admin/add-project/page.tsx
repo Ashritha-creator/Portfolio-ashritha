@@ -13,11 +13,17 @@ export default function AddProjectPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-        await axios.post('https://portfolio-ashritha.onrender.com/auth/login', {
+        await axios.post('https://portfolio-ashritha.onrender.com/projects', {
         title,
         description,
         link,
-      });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
       alert('Project Added Successfully!');
       router.push('/admin');
     } catch (err) {

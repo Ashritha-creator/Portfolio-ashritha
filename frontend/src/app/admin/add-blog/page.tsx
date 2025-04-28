@@ -12,10 +12,17 @@ export default function AddBlogPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-        await axios.post('https://portfolio-ashritha.onrender.com/auth/login', {
-        title,
-        content,
-      });
+      await axios.post('https://portfolio-ashritha.onrender.com/blogs',
+        {
+          title,
+          content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
       alert('Blog Added Successfully!');
       router.push('/admin');
     } catch (err) {
@@ -23,6 +30,7 @@ export default function AddBlogPage() {
       alert('Error adding blog!');
     }
   };
+  
 
   return (
     <div style={{ padding: 20 }}>
