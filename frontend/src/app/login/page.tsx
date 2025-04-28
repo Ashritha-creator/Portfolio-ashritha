@@ -10,7 +10,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3000/auth/login', {

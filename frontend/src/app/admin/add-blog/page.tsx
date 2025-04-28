@@ -9,7 +9,7 @@ export default function AddBlogPage() {
   const [content, setContent] = useState('');
   const router = useRouter();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:3000/blogs', {
