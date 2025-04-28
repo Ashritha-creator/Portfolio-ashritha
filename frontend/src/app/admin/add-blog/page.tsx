@@ -12,7 +12,7 @@ export default function AddBlogPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/blogs', {
+        await axios.post('https://portfolio-ashritha.onrender.com/auth/login', {
         title,
         content,
       });

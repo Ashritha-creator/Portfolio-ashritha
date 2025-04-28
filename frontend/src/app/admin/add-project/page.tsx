@@ -13,7 +13,7 @@ export default function AddProjectPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/projects', {
+        await axios.post('https://portfolio-ashritha.onrender.com/auth/login', {
         title,
         description,
         link,
