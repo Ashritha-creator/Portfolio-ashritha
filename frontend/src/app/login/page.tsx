@@ -21,6 +21,7 @@ export default function LoginPage() {
       localStorage.setItem('token', token);
       router.push('/admin');
     } catch (err) {
+      console.error(err);
       setError('Invalid credentials');
     }
   };
