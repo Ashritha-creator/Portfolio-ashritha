@@ -4,28 +4,28 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
+type Skill = {
+  id: number;
+  name: string;
+};
+
+type Project = {
+  id: number;
+  title: string;
+  description: string;
+  link: string;
+};
+
+type Blog = {
+  id: number;
+  title: string;
+  content: string;
+};
+
 export default function HomePage() {
-  type Skill = {
-    id: number;
-    name: string;
-  };
-  
-  type Project = {
-    id: number;
-    title: string;
-    description: string;
-    link: string;
-  };
-  
-  type Blog = {
-    id: number;
-    title: string;
-    content: string;
-  };
-  
   const [skills, setSkills] = useState<Skill[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [blogs, setBlogs] = useState<Blog[]>([]);  
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -59,7 +59,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
         style={{ backgroundColor: '#ffe4e6', minHeight: '100vh', textAlign: 'center', padding: 50 }}>
-        <img src="/profile.png"
+        <img src="/profile.jpg"
           alt="Profile" style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover', marginBottom: 20 }} />
         <h1 style={{ fontSize: '2.5rem' }}>Ashritha Velineni</h1>
         <h3 style={{ fontSize: '1.5rem', color: '#555' }}>Student</h3>
@@ -71,8 +71,7 @@ export default function HomePage() {
           About Me
         </motion.h2>
         <p style={{ marginTop: 20, maxWidth: 800, marginInline: 'auto' }}>
-          My Name is Ashritha Velineni , Here is my intro 
-        </p>
+    My name is Ashritha Velineni  Here is my Biodata        </p>
       </section>
 
       {/* Skills Section */}
@@ -81,7 +80,7 @@ export default function HomePage() {
           Skills
         </motion.h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
-          {skills.map((skill: any) => (
+          {skills.map((skill: Skill) => (
             <motion.div key={skill.id} whileHover={{ scale: 1.1 }}
               style={{ padding: 20, border: '2px solid #00acc1', borderRadius: 10, minWidth: 100 }}>
               {skill.name}
@@ -96,7 +95,7 @@ export default function HomePage() {
           Projects
         </motion.h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
-          {projects.map((project: any) => (
+          {projects.map((project: Project) => (
             <motion.div key={project.id} whileHover={{ scale: 1.05 }}
               style={{ padding: 20, border: '2px solid #fbc02d', borderRadius: 10, width: 250 }}>
               <h4>{project.title}</h4>
@@ -113,7 +112,7 @@ export default function HomePage() {
           Blogs
         </motion.h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
-          {blogs.map((blog: any) => (
+          {blogs.map((blog: Blog) => (
             <motion.div key={blog.id} whileHover={{ scale: 1.05 }}
               style={{ padding: 20, border: '2px solid #ba68c8', borderRadius: 10, width: 250 }}>
               <h4>{blog.title}</h4>
