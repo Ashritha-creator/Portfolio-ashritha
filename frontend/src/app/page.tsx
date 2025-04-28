@@ -5,9 +5,27 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 
 export default function HomePage() {
-  const [skills, setSkills] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [blogs, setBlogs] = useState([]);
+  type Skill = {
+    id: number;
+    name: string;
+  };
+  
+  type Project = {
+    id: number;
+    title: string;
+    description: string;
+    link: string;
+  };
+  
+  type Blog = {
+    id: number;
+    title: string;
+    content: string;
+  };
+  
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
