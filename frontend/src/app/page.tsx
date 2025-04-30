@@ -60,7 +60,7 @@ export default function HomePage() {
       <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
         style={{ backgroundColor: '#ffe4e6', minHeight: '100vh', textAlign: 'center', padding: 50 }}>
         <img src="/profile.jpg"
-          alt="Profile" style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover', marginBottom: 20 }} />
+          alt="Profile" style={{ width: 300, height: 300, borderRadius: '70%', objectFit: 'cover', marginBottom: 50 }} />
         <h1 style={{ fontSize: '2.5rem' }}>Ashritha Velineni</h1>
         <h3 style={{ fontSize: '1.5rem', color: '#555' }}>Student</h3>
       </motion.section>
@@ -70,8 +70,8 @@ export default function HomePage() {
         <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           About Me
         </motion.h2>
-        <p style={{ marginTop: 20, maxWidth: 800, marginInline: 'auto' }}>
-    My name is Ashritha Velineni  Here is my Biodata        </p>
+        <p style={{ marginTop: 40, maxWidth: 800, marginInline: 'auto' }}>
+    My name is Ashritha Velineni , I am student in Quinnipiac University         </p>
       </section>
 
       {/* Skills Section */}
