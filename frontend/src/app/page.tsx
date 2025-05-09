@@ -33,9 +33,11 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const skillsRes = await axios.get('https://portfolio-ashritha.onrender.com/skills');
-        const projectsRes = await axios.get('https://portfolio-ashritha.onrender.com/projects');
-        const blogsRes = await axios.get('https://portfolio-ashritha.onrender.com/blogs');
+        const [skillsRes, projectsRes, blogsRes] = await Promise.all([
+          axios.get('https://portfolio-ashritha.onrender.com/skills'),
+          axios.get('https://portfolio-ashritha.onrender.com/projects'),
+          axios.get('https://portfolio-ashritha.onrender.com/blogs'),
+        ]);
         setSkills(skillsRes.data);
         setProjects(projectsRes.data);
         setBlogs(blogsRes.data);
@@ -55,94 +57,101 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif' }}>
-      {/* Hero Section */}
-      <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
-        style={{ backgroundColor: '#ffe4e6', minHeight: '100vh', textAlign: 'center', padding: 50 }}>
-        <img src="/profile.jpg"
-          alt="Profile" style={{ width: 300, height: 300, borderRadius: '70%', objectFit: 'cover', marginBottom: 50 }} />
-        <h1 style={{ fontSize: '2.5rem' }}>Ashritha Velineni</h1>
-        <h3 style={{ fontSize: '1.5rem', color: '#555' }}>Student</h3>
+    <div style={{ fontFamily: 'Poppins, sans-serif', lineHeight: 1.6 }}>
+      {/* Hero */}
+      <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
+        style={{ backgroundColor: '#fef3c7', padding: '4rem 1rem', textAlign: 'center' }}>
+        <img src="/profile.jpg" alt="Ashritha" style={{
+          width: 160, height: 160, borderRadius: '50%', objectFit: 'cover', marginBottom: 20,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+        }} />
+        <h1 style={{ fontSize: '2.5rem', margin: '1rem 0' }}>Ashritha Velineni</h1>
+        <h3 style={{ color: '#4b5563' }}>Student | Aspiring Full Stack Developer</h3>
       </motion.section>
 
-      {/* About Section */}
-      <section style={{ backgroundColor: '#ffffff', minHeight: '60vh', padding: 50 }}>
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
-          About Me
-        </motion.h2>
-        <p style={{ marginTop: 40, maxWidth: 800, marginInline: 'auto' }}>
-    My name is Ashritha Velineni , I am student in Quinnipiac University         </p>
+      {/* About */}
+      <section style={{ backgroundColor: '#ffffff', padding: '4rem 2rem', textAlign: 'center' }}>
+        <h2>About Me</h2>
+        <p style={{ maxWidth: 800, margin: '1rem auto', fontSize: '1.1rem' }}>
+          The pig (Sus domesticus), also called swine or hog, is an omnivorous, domesticated, even-toed, hoofed mammal...
+        </p>
       </section>
 
-      {/* Skills Section */}
-      <section style={{ backgroundColor: '#e0f7fa', minHeight: '60vh', padding: 50 }}>
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
-          Skills
-        </motion.h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
+      {/* Skills */}
+      <section style={{ backgroundColor: '#e0f2fe', padding: '4rem 2rem' }}>
+        <h2 style={{ textAlign: 'center' }}>Skills</h2>
+        <div style={{
+          display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem',
+          marginTop: '2rem'
+        }}>
           {skills.map((skill: Skill) => (
-            <motion.div key={skill.id} whileHover={{ scale: 1.1 }}
-              style={{ padding: 20, border: '2px solid #00acc1', borderRadius: 10, minWidth: 100 }}>
-              {skill.name}
-            </motion.div>
+            <div key={skill.id} style={{
+              background: '#fff', padding: '1rem 2rem', borderRadius: '8px',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
+            }}>{skill.name}</div>
           ))}
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section style={{ backgroundColor: '#fff9c4', minHeight: '60vh', padding: 50 }}>
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
-          Projects
-        </motion.h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
-          {projects.map((project: Project) => (
-            <motion.div key={project.id} whileHover={{ scale: 1.05 }}
-              style={{ padding: 20, border: '2px solid #fbc02d', borderRadius: 10, width: 250 }}>
-              <h4>{project.title}</h4>
-              <p>{project.description}</p>
-              <a href={project.link} target="_blank" style={{ color: '#f57f17' }}>View Project</a>
-            </motion.div>
+      {/* Projects */}
+      <section style={{ backgroundColor: '#fef9c3', padding: '4rem 2rem' }}>
+        <h2 style={{ textAlign: 'center' }}>Projects</h2>
+        <div style={{
+          display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.5rem',
+          marginTop: '2rem'
+        }}>
+          {projects.map((p: Project) => (
+            <div key={p.id} style={{
+              background: '#fff', padding: '1.5rem', borderRadius: '10px',
+              width: 280, boxShadow: '0 2px 8px rgba(0,0,0,0.12)'
+            }}>
+              <h4>{p.title}</h4>
+              <p>{p.description}</p>
+              <a href={p.link} target="_blank" style={{ color: '#2563eb' }}>Visit</a>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Blogs Section */}
-      <section style={{ backgroundColor: '#f3e5f5', minHeight: '60vh', padding: 50 }}>
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
-          Blogs
-        </motion.h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 20, marginTop: 30 }}>
+      {/* Blogs */}
+      <section style={{ backgroundColor: '#f3e8ff', padding: '4rem 2rem' }}>
+        <h2 style={{ textAlign: 'center' }}>Blogs</h2>
+        <div style={{
+          display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1.5rem',
+          marginTop: '2rem'
+        }}>
           {blogs.map((blog: Blog) => (
-            <motion.div key={blog.id} whileHover={{ scale: 1.05 }}
-              style={{ padding: 20, border: '2px solid #ba68c8', borderRadius: 10, width: 250 }}>
+            <div key={blog.id} style={{
+              background: '#fff', padding: '1.2rem', borderRadius: '10px',
+              width: 260, boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
+            }}>
               <h4>{blog.title}</h4>
-              <p>{blog.content.substring(0, 80)}...</p>
-            </motion.div>
+              <p>{blog.content.slice(0, 90)}...</p>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section style={{ backgroundColor: '#c8e6c9', minHeight: '60vh', padding: 50 }}>
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
-          Contact Me
-        </motion.h2>
-        <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 20 }}>
-          <input type="text" placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)}
-            style={{ marginBottom: 10, padding: 10, width: '300px' }} />
-          <input type="email" placeholder="Your Email" value={email} onChange={(e) => setEmail(e.target.value)}
-            style={{ marginBottom: 10, padding: 10, width: '300px' }} />
-          <textarea placeholder="Your Message" value={message} onChange={(e) => setMessage(e.target.value)}
-            style={{ marginBottom: 10, padding: 10, width: '300px', height: 100 }} />
-          <button type="submit" style={{ padding: 10, width: '150px', backgroundColor: '#4caf50', color: 'white', border: 'none', borderRadius: 5 }}>
-            Send
-          </button>
+      {/* Contact */}
+      <section style={{ backgroundColor: '#d1fae5', padding: '4rem 2rem', textAlign: 'center' }}>
+        <h2>Contact Me</h2>
+        <form onSubmit={handleContactSubmit} style={{
+          maxWidth: 400, margin: '2rem auto', display: 'flex',
+          flexDirection: 'column', gap: '1rem'
+        }}>
+          <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required />
+          <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
+          <textarea placeholder="Message" value={message} onChange={e => setMessage(e.target.value)} rows={4} required />
+          <button type="submit" style={{
+            padding: '0.8rem', backgroundColor: '#059669', color: 'white',
+            border: 'none', borderRadius: '6px'
+          }}>Send</button>
         </form>
       </section>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#263238', color: 'white', padding: 20, textAlign: 'center' }}>
-        © 2025 Ashritha Velineni | All Rights Reserved
+      <footer style={{ backgroundColor: '#1f2937', color: 'white', padding: '1.5rem', textAlign: 'center' }}>
+        © 2025 Ashritha Velineni. All rights reserved.
       </footer>
     </div>
   );
