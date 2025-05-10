@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import Image from 'next/image';
 
 type Skill = {
   id: number;
@@ -25,7 +26,7 @@ type Blog = {
 export default function HomePage() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+ // const [blogs, setBlogs] = useState<Blog[]>([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -59,7 +60,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}
         style={{ backgroundColor: '#ffe4e6', minHeight: '100vh', textAlign: 'center', padding: 50 }}>
-        <img
+        <Image
   src="/profile.jpg"
   alt="Profile"
   style={{ width: 200, height: 200, borderRadius: '50%', objectFit: 'cover', marginBottom: 30 }}
@@ -73,7 +74,7 @@ export default function HomePage() {
           About Me
         </motion.h2>
         <p style={{ marginTop: 40, maxWidth: 800, marginInline: 'auto' }}>
-  Hi, I'm Ashritha Velineni, a passionate Computer Science student at Quinnipiac University. I completed my Bachelor's degree in 2024 from the Institute of Aeronautical Engineering, graduating with a CGPA of 8.0. I'm highly motivated to pursue a career as a Software Engineer and aim to work at one of the world's top multinational companies. I enjoy solving real-world problems with code and continuously strive to expand my knowledge and skills in software development.
+  Hi, I am Ashritha Velineni, a passionate Computer Science student at Quinnipiac University. I completed my Bachelor degree in 2024 from the Institute of Aeronautical Engineering, graduating with a CGPA of 8.0. I am highly motivated to pursue a career as a Software Engineer and aim to work at one of the world's top multinational companies. I enjoy solving real-world problems with code and continuously strive to expand my knowledge and skills in software development.
   </p>
       </section>
 
