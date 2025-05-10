@@ -74,7 +74,7 @@ export default function HomePage() {
           About Me
         </motion.h2>
         <p style={{ marginTop: 40, maxWidth: 800, marginInline: 'auto' }}>
-  Hi, I am Ashritha Velineni, a passionate Computer Science student at Quinnipiac University. I completed my Bachelor degree in 2024 from the Institute of Aeronautical Engineering, graduating with a CGPA of 8.0. I am highly motivated to pursue a career as a Software Engineer and aim to work at one of the world's top multinational companies. I enjoy solving real-world problems with code and continuously strive to expand my knowledge and skills in software development.
+  Hi, I am Ashritha Velineni, a passionate Computer Science student at Quinnipiac University. I completed my Bachelor degree in 2024 from the Institute of Aeronautical Engineering, graduating with a CGPA of 8.0. I am highly motivated to pursue a career as a Software Engineer and aim to work at one of the worlds top multinational companies. I enjoy solving real world problems with code and continuously strive to expand my knowledge and skills in software development.
   </p>
       </section>
 
