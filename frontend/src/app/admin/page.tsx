@@ -1,122 +1,109 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-type Skill = {
-  id: number;
-  name: string;
-};
+type Skill = { id: number; name: string };
+type Project = { id: number; title: string; description: string; link: string };
 
-type Project = {
-  id: number;
-  title: string;
-  description: string;
-  link: string;
-};
-
-type Blog = {
-  id: number;
-  title: string;
-  content: string;
-};
-
-export default function HomePage() {
+export default function AdminPage() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [newSkill, setNewSkill] = useState('');
+  const [newProject, setNewProject] = useState({ title: '', description: '', link: '' });
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const [skillsRes, projectsRes, blogsRes] = await Promise.all([
-          axios.get('https://portfolio-ashritha.onrender.com/skills'),
-          axios.get('https://portfolio-ashritha.onrender.com/projects'),
-          axios.get('https://portfolio-ashritha.onrender.com/blogs'),
-        ]);
-        setSkills(skillsRes.data);
-        setProjects(projectsRes.data);
-        setBlogs(blogsRes.data);
-      } catch (err) {
-        console.error('Error fetching data', err);
-      }
+      const skillRes = await axios.get('https://portfolio-ashritha.onrender.com/skills');
+      const projRes = await axios.get('https://portfolio-ashritha.onrender.com/projects');
+      setSkills(skillRes.data);
+      setProjects(projRes.data);
     }
     fetchData();
   }, []);
 
-  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    alert('Thank you for reaching out, Ashritha will get back to you!');
-    setName('');
-    setEmail('');
-    setMessage('');
+  const addSkill = async () => {
+    if (!newSkill.trim()) return;
+    const res = await axios.post('https://portfolio-ashritha.onrender.com/skills', { name: newSkill });
+    setSkills([...skills, res.data]);
+    setNewSkill('');
+  };
+
+  const deleteSkill = async (id: number) => {
+    await axios.delete(`https://portfolio-ashritha.onrender.com/skills/${id}`);
+    setSkills(skills.filter(s => s.id !== id));
+  };
+
+  const addProject = async () => {
+    const { title, description, link } = newProject;
+    if (!title || !description || !link) return;
+    const res = await axios.post('https://portfolio-ashritha.onrender.com/projects', newProject);
+    setProjects([...projects, res.data]);
+    setNewProject({ title: '', description: '', link: '' });
+  };
+
+  const deleteProject = async (id: number) => {
+    await axios.delete(`https://portfolio-ashritha.onrender.com/projects/${id}`);
+    setProjects(projects.filter(p => p.id !== id));
   };
 
   return (
-    <div style={{ fontFamily: 'Poppins, sans-serif', lineHeight: 1.6 }}>
+    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      <h1>Admin Dashboard</h1>
 
-      <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          minHeight: '100vh',
-          backgroundColor: '#111827',
-          color: '#ffffff',
-          alignItems: 'center',
-          padding: '3rem',
-        }}
-      >
-        {/* Left side: Image */}
-        <div style={{ flex: '1 1 400px', textAlign: 'center' }}>
-          <img
-            src="/profile.jpg"
-            alt="Ashritha"
-            style={{
-              width: '100%',
-              maxWidth: '400px',
-              borderRadius: '12px',
-              objectFit: 'cover',
-              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.5)',
-            }}
-          />
-        </div>
+      {/* Skills Section */}
+      <section style={{ marginTop: '2rem' }}>
+        <h2>Manage Skills</h2>
+        <input
+          value={newSkill}
+          onChange={(e) => setNewSkill(e.target.value)}
+          placeholder="New skill"
+          style={{ padding: '0.5rem', marginRight: '1rem' }}
+        />
+        <button onClick={addSkill}>Add Skill</button>
 
-        {/* Right side: Text */}
-        <div style={{ flex: '1 1 400px', padding: '2rem' }}>
-          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>My Portfolio</h1>
-          <p style={{ fontSize: '1.1rem', marginBottom: '2rem', color: '#d1d5db' }}>
-            Welcome to my personal portfolio website. Here you can explore my projects, skills, and blog articles.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <button style={{
-              padding: '0.8rem 1.5rem',
-              backgroundColor: '#f9fafb',
-              color: '#111827',
-              fontWeight: 'bold',
-              borderRadius: '6px',
-              border: 'none',
-              cursor: 'pointer'
-            }}>
-              Explore Now
-            </button>
-            <button style={{
-              padding: '0.8rem 1.5rem',
-              backgroundColor: 'transparent',
-              border: '2px solid #f9fafb',
-              color: '#f9fafb',
-              borderRadius: '6px',
-              fontWeight: 'bold',
-              cursor: 'pointer'
-            }}>
-              Play Video ▶
-            </button>
-          </div>
-        </div>
-      </motion.section>
+        <ul>
+          {skills.map(skill => (
+            <li key={skill.id} style={{ marginTop: '0.5rem' }}>
+              {skill.name}
+              <button onClick={() => deleteSkill(skill.id)} style={{ marginLeft: '1rem', color: 'red' }}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Projects Section */}
+      <section style={{ marginTop: '3rem' }}>
+        <h2>Manage Projects</h2>
+        <input
+          value={newProject.title}
+          onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
+          placeholder="Title"
+          style={{ display: 'block', marginBottom: '0.5rem', padding: '0.5rem' }}
+        />
+        <input
+          value={newProject.description}
+          onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+          placeholder="Description"
+          style={{ display: 'block', marginBottom: '0.5rem', padding: '0.5rem' }}
+        />
+        <input
+          value={newProject.link}
+          onChange={(e) => setNewProject({ ...newProject, link: e.target.value })}
+          placeholder="Link"
+          style={{ display: 'block', marginBottom: '0.5rem', padding: '0.5rem' }}
+        />
+        <button onClick={addProject}>Add Project</button>
+
+        <ul>
+          {projects.map(project => (
+            <li key={project.id} style={{ marginTop: '0.5rem' }}>
+              <strong>{project.title}</strong> — {project.link}
+              <button onClick={() => deleteProject(project.id)} style={{ marginLeft: '1rem', color: 'red' }}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
