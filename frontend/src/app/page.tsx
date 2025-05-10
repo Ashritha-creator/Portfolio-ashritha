@@ -65,7 +65,8 @@ export default function HomePage() {
   alt="Profile"
   style={{ width: 200, height: 200, borderRadius: '50%', objectFit: 'cover', marginBottom: 30 }}
 />
-        <h3 style={{ fontSize: '1.5rem', color: '#555' }}>Student</h3>
+        <h1>Ashritha Velineni</h1>
+        <h3 style={{ fontSize: '1.5rem', color: '#555' }}>Student at Quinnipiac University</h3>
       </motion.section>
 
       {/* About Section */}
