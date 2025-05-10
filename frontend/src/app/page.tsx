@@ -17,11 +17,11 @@ type Project = {
   link: string;
 };
 
-type Blog = {
-  id: number;
-  title: string;
-  content: string;
-};
+// type Blog = {
+//   id: number;
+//   title: string;
+//   content: string;
+// };
 
 export default function HomePage() {
   const [skills, setSkills] = useState<Skill[]>([]);
@@ -36,10 +36,10 @@ export default function HomePage() {
       try {
         const skillsRes = await axios.get('https://portfolio-ashritha.onrender.com/skills');
         const projectsRes = await axios.get('https://portfolio-ashritha.onrender.com/projects');
-        const blogsRes = await axios.get('https://portfolio-ashritha.onrender.com/blogs');
+      //  const blogsRes = await axios.get('https://portfolio-ashritha.onrender.com/blogs');
         setSkills(skillsRes.data);
         setProjects(projectsRes.data);
-        setBlogs(blogsRes.data);
+        // setBlogs(blogsRes.data);
       } catch (err) {
         console.error('Error fetching data', err);
       }
