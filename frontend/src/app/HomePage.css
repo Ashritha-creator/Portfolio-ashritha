@@ -32,6 +32,37 @@
   margin-top: 2rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: #1f2937;
+  padding: 1rem 2rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.navbar a:hover {
+  color: #facc15;
+}
+
 .skill-card {
   background: #e0f2fe;
   border-left: 5px solid #0284c7;
