@@ -14,9 +14,11 @@ export class ProjectController {
   getAllProjects() {
     return this.projectService.findAll();
   }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.projectsService.remove(+id);
+  }
 }
 
-@Delete(':id')
-async remove(@Param('id') id: string) {
-  return this.projectsService.remove(+id);
-}
+
