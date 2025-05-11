@@ -48,29 +48,38 @@ export default function HomePage() {
   };
 
   return (
-<div className="container">   
-  <section className="hero-banner">
-  <div className="hero-overlay">
-    <div className="hero-text">
-      <p>Hello, I am</p>
-      <h1>Ashritha Velineni</h1>
-      <h2>Student</h2>
-    </div>
-  </div>
+    <div className="container">
+      <nav className="navbar">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
 
-  <div className="hero-image-circle">
-    <Image
-      src="/profile.jpg"
-      alt="Ashritha"
-      width={140}
-      height={140}
-      style={{ borderRadius: '50%', objectFit: 'cover' }}
-    />
-  </div>
-</section>
+      <section className="hero-banner">
+        <div className="hero-overlay">
 
+          <div className="hero-text">
+            <p>Hello, I am</p>
+            <h1>Ashritha Velineni</h1>
+            <h2>Student</h2>
+          </div>
+        </div>
 
-      <section className="about">
+        <div className="hero-image-circle">
+          <Image
+            src="/profile.jpg"
+            alt="Ashritha"
+            width={140}
+            height={140}
+            style={{ borderRadius: '50%', objectFit: 'cover' }}
+          />
+        </div>
+      </section>
+
+      <section id="about" className="about">
         <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           About Me
         </motion.h2>
@@ -83,7 +92,7 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="skills">
+      <section id="skills" className="skills">
         <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           Skills
         </motion.h2>
@@ -96,7 +105,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="projects">
+      <section id="projects" className="projects">
         <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           Projects
         </motion.h2>
@@ -113,7 +122,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="contact-form">
+      <section id="contact" className="contact-form">
         <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           Contact Me
         </motion.h2>
