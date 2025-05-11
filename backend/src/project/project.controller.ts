@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Delete, Param } from '@nestjs/common';
 import { ProjectService } from './project.service';
 
 @Controller('projects')
@@ -17,8 +17,6 @@ export class ProjectController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return this.projectsService.remove(+id);
+    return this.projectService.remove(+id);
   }
 }
-
-
