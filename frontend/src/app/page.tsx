@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import Image from 'next/image';
-import './HomePage.css'; 
+import './HomePage.css';
 
 type Skill = {
   id: number;
@@ -59,11 +59,12 @@ export default function HomePage() {
             style={{ borderRadius: '50%', objectFit: 'cover' }}
           />
         </div>
+        <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginTop: '1rem' }}>Ashritha Velineni</h1>
         <h3>Student</h3>
       </motion.section>
 
       <section className="about">
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           About Me
         </motion.h2>
         <p>
@@ -76,7 +77,7 @@ export default function HomePage() {
       </section>
 
       <section className="skills">
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           Skills
         </motion.h2>
         <div className="skills-grid">
@@ -89,7 +90,7 @@ export default function HomePage() {
       </section>
 
       <section className="projects">
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           Projects
         </motion.h2>
         <div className="projects-grid">
@@ -106,7 +107,7 @@ export default function HomePage() {
       </section>
 
       <section className="contact-form">
-        <motion.h2 initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
+        <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
           Contact Me
         </motion.h2>
         <form onSubmit={handleContactSubmit}>
