@@ -48,14 +48,9 @@ export default function HomePage() {
   };
 
   return (
-<section className="hero-banner">
+<div className="container">   
+  <section className="hero-banner">
   <div className="hero-overlay">
-    <div className="social-icons">
-      <a href="#"><i className="fab fa-twitter"></i></a>
-      <a href="#"><i className="fab fa-github"></i></a>
-      <a href="#"><i className="fab fa-linkedin"></i></a>
-    </div>
-
     <div className="hero-text">
       <p>Hello, I am</p>
       <h1>Ashritha Velineni</h1>
