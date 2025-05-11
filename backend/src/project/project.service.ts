@@ -9,6 +9,13 @@ export class ProjectService {
     return this.prisma.project.create({ data });
   }
 
+  async remove(id: number): Promise<Project> {
+  return this.prisma.project.delete({
+    where: { id },
+  });
+}
+
+
   findAll() {
     return this.prisma.project.findMany();
   }
