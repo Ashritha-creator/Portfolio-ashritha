@@ -48,20 +48,32 @@ export default function HomePage() {
   };
 
   return (
-    <div className="container">
-      <motion.section className="hero" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-        <div className="hero-image">
-          <Image
-            src="/profile.jpg"
-            alt="Profile"
-            width={200}
-            height={200}
-            style={{ borderRadius: '50%', objectFit: 'cover' }}
-          />
-        </div>
-        <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginTop: '1rem' }}>Ashritha Velineni</h1>
-        <h3>Student</h3>
-      </motion.section>
+<section className="hero-banner">
+  <div className="hero-overlay">
+    <div className="social-icons">
+      <a href="#"><i className="fab fa-twitter"></i></a>
+      <a href="#"><i className="fab fa-github"></i></a>
+      <a href="#"><i className="fab fa-linkedin"></i></a>
+    </div>
+
+    <div className="hero-text">
+      <p>Hello, I am</p>
+      <h1>Ashritha Velineni</h1>
+      <h2>Student</h2>
+    </div>
+  </div>
+
+  <div className="hero-image-circle">
+    <Image
+      src="/profile.jpg"
+      alt="Ashritha"
+      width={140}
+      height={140}
+      style={{ borderRadius: '50%', objectFit: 'cover' }}
+    />
+  </div>
+</section>
+
 
       <section className="about">
         <motion.h2 className="section-heading" initial={{ y: 50, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
